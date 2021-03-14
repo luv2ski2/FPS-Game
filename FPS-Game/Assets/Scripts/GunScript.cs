@@ -50,7 +50,7 @@ public class GunScript : MonoBehaviour
         newBullet.GetComponent<BulletScript>().targetDir = fpsCam.transform.forward;
         newBullet.GetComponent<BulletScript>().force = force;
         
-        Destroy(newBullet, 5f);
+        // Destroy(newBullet, 5f);
 
     }
 }

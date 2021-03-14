@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +33,13 @@ public class BulletScript : MonoBehaviour
         {
             // GetComponent<Rigidbody>().AddForce(targetDir * Time.deltaTime * force);
             
-            Debug.Log("Hello There!");
+            // Debug.Log("Hello There!");
         }
+    }
+
+    private void OnCollisionEnter(Collision hit)
+    {
+        Debug.Log(hit.collider.name + "minecraft!!!!");
+        Destroy(gameObject, 0.5f);
     }
 }
