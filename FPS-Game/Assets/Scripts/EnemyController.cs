@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
+    public Transform bulletPoint;
+    public GameObject bullet;
+
+    private float nextTimeToFire = 0f;
+    
     public Transform player;
 
     public float speed = 20f;
@@ -45,11 +50,30 @@ public class EnemyController : MonoBehaviour
             
             moving = false;
         }
+        
+        // shooting
+        if ((Vector3.Distance(transform.position, player.position) < attackRange + 3) && Time.time >= nextTimeToFire)
+        {
+            nextTimeToFire = Time.time + 1f / 1f;
+            Shoot();
+        }
 
 
 
         // agent.SetDestination(player.position);
     }
+
+    void Shoot()
+    {
+        Vector3 bulletStart = bulletPoint.position;
+        Quaternion bulletRotation = transform.rotation;
+
+        GameObject newBullet = Instantiate(bullet, bulletStart, bulletRotation);
+        
+        newBullet.GetComponent<Rigidbody>().AddForce(transform.transform.forward.normalized * 1000);
+
+    }
+    
 
     private void FixedUpdate()
     {

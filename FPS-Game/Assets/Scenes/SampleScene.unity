@@ -1132,6 +1132,36 @@ CapsuleCollider:
   m_Height: 0.069171645
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.034585822}
+--- !u!1 &852028574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 852028575}
+  m_Layer: 0
+  m_Name: BulletEnemyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &852028575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852028574}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.572}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2084074983}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &933725387
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,6 +2354,7 @@ Transform:
   m_Children:
   - {fileID: 587792690}
   - {fileID: 675825770}
+  - {fileID: 852028575}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2339,8 +2370,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e635f622cd50ee44842eab0bf3506d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPoint: {fileID: 852028575}
+  bullet: {fileID: 8714690297574562000, guid: d83ffa5dc35bd494f82e8bf6feb8ee22, type: 3}
   player: {fileID: 458063577}
-  speed: 20
+  speed: 10
   rb: {fileID: 0}
   attackRange: 5
   attackPower: 75
