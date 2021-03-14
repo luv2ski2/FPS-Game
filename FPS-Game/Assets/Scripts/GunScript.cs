@@ -6,6 +6,7 @@ public class GunScript : MonoBehaviour
 {
     public float damage = 10f;
     public float range = 100f;
+    public float force = 75f;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
@@ -47,6 +48,9 @@ public class GunScript : MonoBehaviour
         newBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward.normalized * 1000);
 
         newBullet.GetComponent<BulletScript>().targetDir = fpsCam.transform.forward;
+        newBullet.GetComponent<BulletScript>().force = force;
+        
+        Destroy(newBullet, 5f);
 
     }
 }
