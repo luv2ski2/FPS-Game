@@ -45,8 +45,9 @@ public class GunScript : MonoBehaviour
         Quaternion bulletRot = fpsCam.transform.rotation;
         GameObject newBullet = Instantiate(bullet, bulletStart, bulletRot);
 
-        newBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward.normalized * 1000);
+        newBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward.normalized * 1500);
 
+        // I don't think this does anything
         newBullet.GetComponent<BulletScript>().targetDir = fpsCam.transform.forward;
         newBullet.GetComponent<BulletScript>().force = force;
         

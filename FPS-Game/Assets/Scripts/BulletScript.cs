@@ -10,6 +10,8 @@ public class BulletScript : MonoBehaviour
     public Vector3 targetDir;
 
     public float force = 1000f;
+
+    public GameObject shooter;
     
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class BulletScript : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(directionVector * Time.deltaTime * force);
         }
 
+        // also not used ????
         if (targetDir != null)
         {
             // GetComponent<Rigidbody>().AddForce(targetDir * Time.deltaTime * force);
@@ -39,7 +42,17 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
+        if (hit.collider.GetComponent<EnemyNavMes>() != null)
+        {
+            hit.collider.GetComponent<EnemyNavMes>().GetHit();
+        }
+
+        if (hit.collider.gameObject == shooter)
+        {
+            return;
+        }
         Debug.Log(hit.collider.name + "minecraft!!!!");
         Destroy(gameObject, 0.5f);
+        
     }
 }
