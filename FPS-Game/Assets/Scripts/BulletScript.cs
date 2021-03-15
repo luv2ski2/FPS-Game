@@ -42,15 +42,16 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
-        if (hit.collider.GetComponent<EnemyNavMes>() != null)
-        {
-            hit.collider.GetComponent<EnemyNavMes>().GetHit();
-        }
-
         if (hit.collider.gameObject == shooter)
         {
             return;
         }
+        
+        if (hit.collider.GetComponent<EnemyNavMes>() != null)
+        {
+            hit.collider.GetComponent<EnemyNavMes>().GetHit();
+        }
+        
         Debug.Log(hit.collider.name + "minecraft!!!!");
         Destroy(gameObject, 0.5f);
         

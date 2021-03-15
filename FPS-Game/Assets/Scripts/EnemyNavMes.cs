@@ -8,6 +8,8 @@ public class EnemyNavMes : MonoBehaviour
     public NavMeshAgent agent;
     public Rigidbody rb;
 
+    public Animator animator;
+
     // Enemy's target
     public Transform player;
     
@@ -37,9 +39,11 @@ public class EnemyNavMes : MonoBehaviour
         {
             agent.SetDestination(player.position);
             FaceTarget();
+            
+            animator.SetFloat("Speed", agent.velocity.magnitude);
         }
         
-        if ((Vector3.Distance(transform.position, player.position) < range + 3) && Time.time >= nextTimeToFire && agent.enabled)
+        if ((Vector3.Distance(transform.position, player.position) < range + 0.5f) && Time.time >= nextTimeToFire && agent.enabled)
         {
             nextTimeToFire = Time.time + 1f / 1f;
             Shoot();
@@ -71,5 +75,7 @@ public class EnemyNavMes : MonoBehaviour
     {
         agent.enabled = false;
         rb.isKinematic = false;
+
+        animator.enabled = false;
     }
 }
