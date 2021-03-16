@@ -7,6 +7,10 @@ public class BulletScript : MonoBehaviour
 {
     public Transform target;
 
+    public bool firedByPlayer = false;
+
+    public Transform targetPlayer;
+
     public Vector3 targetDir;
 
     public float force = 1000f;
@@ -42,7 +46,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
-        if (hit.collider.gameObject == shooter)
+        if (hit.collider.gameObject == shooter || (hit.collider.gameObject.layer == 9 && !firedByPlayer))
         {
             return;
         }
@@ -50,6 +54,11 @@ public class BulletScript : MonoBehaviour
         if (hit.collider.GetComponent<EnemyNavMes>() != null)
         {
             hit.collider.GetComponent<EnemyNavMes>().GetHit();
+        }
+
+        if (targetPlayer != null && hit.collider.transform == targetPlayer)
+        {
+            hit.collider.GetComponent<PlayerMovement>().GetHit();
         }
         
         Debug.Log(hit.collider.name + "minecraft!!!!");

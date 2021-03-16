@@ -48,6 +48,8 @@ public class GunScript : MonoBehaviour
 
         newBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.forward.normalized * 1500);
 
+        newBullet.GetComponent<BulletScript>().firedByPlayer = true;
+
         // I don't think this does anything
         newBullet.GetComponent<BulletScript>().targetDir = fpsCam.transform.forward;
         newBullet.GetComponent<BulletScript>().force = force;

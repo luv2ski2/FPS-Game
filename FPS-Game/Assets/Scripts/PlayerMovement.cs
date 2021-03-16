@@ -6,16 +6,24 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
 
+    // movement stuff
     public float speed = 12;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
 
+    // movement / jumpy stuff
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    // jumpy stuff
     Vector3 velocity;
     private bool isGrounded;
+
+    public GameObject deadScreen;
+
+    public MouseLook mouselook;
+    public GunScript gunscript;
     
     // Start is called before the first frame update
     void Start()
@@ -48,5 +56,18 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void GetHit()
+    {
+        Debug.Log("I've been deded");
+        
+        deadScreen.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+
+        mouselook.enabled = false;
+        gunscript.enabled = false;
+        this.enabled = false;
     }
 }

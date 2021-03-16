@@ -69,6 +69,8 @@ public class EnemyNavMes : MonoBehaviour
         newBullet.GetComponent<Rigidbody>().AddForce(transform.transform.forward.normalized * force);
 
         newBullet.GetComponent<BulletScript>().shooter = gameObject;
+
+        newBullet.GetComponent<BulletScript>().targetPlayer = player;
     }
 
     public void GetHit()
