@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         deadScreen.SetActive(true);
 
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         mouselook.enabled = false;
         gunscript.enabled = false;

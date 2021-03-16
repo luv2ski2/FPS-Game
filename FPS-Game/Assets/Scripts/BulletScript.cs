@@ -61,7 +61,7 @@ public class BulletScript : MonoBehaviour
             hit.collider.GetComponent<PlayerMovement>().GetHit();
         }
         
-        Debug.Log(hit.collider.name + "minecraft!!!!");
+        // Debug.Log(hit.collider.name + "minecraft!!!!");
         Destroy(gameObject, 0.5f);
         
     }
