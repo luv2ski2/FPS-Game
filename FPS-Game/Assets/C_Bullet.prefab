@@ -125,5 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  firedByPlayer: 0
+  targetPlayer: {fileID: 0}
   targetDir: {x: 0, y: 0, z: 0}
   force: 1000
+  shooter: {fileID: 0}
