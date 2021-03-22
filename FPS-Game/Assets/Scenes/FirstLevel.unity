@@ -605,7 +605,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21260
+  m_Name: pb_Mesh14470
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11868,6 +11868,9 @@ MonoBehaviour:
   crouchOffset: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
   crouchForce: 450
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!136 &1053623140
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -13534,7 +13537,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20830
+  m_Name: pb_Mesh14340
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

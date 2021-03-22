@@ -32,13 +32,23 @@ public class newPlayerMovement : MonoBehaviour
     public Rigidbody rb;
     public float crouchForce = 5f;
 
+    // tracks if crouching, used to stop weird stuff, maybe kill enemies.
     private bool crouching;
+
+    public LayerMask enemyLayer;
+    
+    // use when deciding if enemy is in layer, layer.value is in 2 bit form, 
+    // so doesn't work
+    private int enemyLayerValue;
     
     // Start is called before the first frame update
     void Start()
     {
         crouchOffset = new Vector3(0, 2f, 0);
         rb = GetComponent<Rigidbody>();
+        
+        // change enemyLayer to normal (hopefully)
+        enemyLayerValue = (int) Mathf.Log(enemyLayer.value, 2);
     }
 
     // Update is called once per frame
@@ -63,16 +73,20 @@ public class newPlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && isGrounded)
         {
-            // crouching = true;
+            crouching = true;
             startCrouch();
         }
 
         if (Input.GetButtonUp("Fire2"))
         {
-            // crouching = false;
-            stopCrouch();
+            if (crouching)
+            {
+                stopCrouch();
+                crouching = false;
+            }
+            // stopCrouch();
         }
         
         velocity.y += gravity * Time.deltaTime;
@@ -96,7 +110,12 @@ public class newPlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        return;
+        if (collision.transform.gameObject.layer == enemyLayerValue && crouching)
+        {
+            collision.transform.GetComponent<EnemyNavMes>().GetHit();
+        }
+        
+        // return;
         // If crouching and collision is enemy, kill enemy.
         // Allows sliding into enemies
     }

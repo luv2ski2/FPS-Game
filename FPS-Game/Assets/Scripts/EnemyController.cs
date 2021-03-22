@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
+// not used, use EnemyNavMes.cs instead
+
+
 public class EnemyController : MonoBehaviour
 {
     public Transform bulletPoint;
