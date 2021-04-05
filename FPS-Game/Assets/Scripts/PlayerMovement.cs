@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
+// NOT USED, use newPlayerMovement.cs
+
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;

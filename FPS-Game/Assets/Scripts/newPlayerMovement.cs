@@ -36,10 +36,21 @@ public class newPlayerMovement : MonoBehaviour
     private bool crouching;
 
     public LayerMask enemyLayer;
+
+    public LayerMask wallLayer;
     
     // use when deciding if enemy is in layer, layer.value is in 2 bit form, 
     // so doesn't work
     private int enemyLayerValue;
+    private int wallLayerValue;
+    
+    // wall sliding stuff
+    private bool isSliding;
+    private float startVelocity;
+    private Vector3 dirToWall;
+    
+    // Pause game on death
+    public Timer timer;
     
     // Start is called before the first frame update
     void Start()
@@ -49,6 +60,8 @@ public class newPlayerMovement : MonoBehaviour
         
         // change enemyLayer to normal (hopefully)
         enemyLayerValue = (int) Mathf.Log(enemyLayer.value, 2);
+        // change wallLayer to normal base ten math
+        wallLayerValue = (int) Mathf.Log(wallLayer.value, 2);
     }
 
     // Update is called once per frame
@@ -102,6 +115,12 @@ public class newPlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        
+        timer.stopPlaying();
+        
+        // Stops game when replaying, so no
+        //Time.timeScale = 0f;
+        // Debug.Log(Time.time);
 
         mouselook.enabled = false;
         gunscript.enabled = false;
@@ -115,9 +134,31 @@ public class newPlayerMovement : MonoBehaviour
             collision.transform.GetComponent<EnemyNavMes>().GetHit();
         }
         
+        Debug.Log("Touching Somethin");
+
+        if (collision.transform.gameObject.layer == wallLayerValue && Input.GetButton("Jump") && !isSliding && !isGrounded)
+        {
+            Debug.Log("Hello There");
+            startWallSlide();
+        }
+        
         // return;
         // If crouching and collision is enemy, kill enemy.
         // Allows sliding into enemies
+    }
+
+    private void startWallSlide()
+    {
+        isSliding = true;
+
+        // no falling
+        rb.constraints = RigidbodyConstraints.FreezePositionY;
+        
+        rb.isKinematic = false;
+        rb.velocity = controller.velocity;
+        startVelocity = controller.velocity.magnitude;
+        
+        controller.enabled = false;
     }
 
     private void startCrouch()

@@ -58,7 +58,8 @@ public class BulletScript : MonoBehaviour
 
         if (targetPlayer != null && hit.collider.transform == targetPlayer)
         {
-            hit.collider.GetComponent<PlayerMovement>().GetHit();
+            // Use newPlayerMovement
+            hit.collider.GetComponent<newPlayerMovement>().GetHit();
         }
         
         // Debug.Log(hit.collider.name + "minecraft!!!!");

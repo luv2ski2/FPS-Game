@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WinGame : MonoBehaviour
@@ -11,6 +12,10 @@ public class WinGame : MonoBehaviour
 
     public MouseLook mouselook;
     public GunScript gunScript;
+    public newPlayerMovement playerMovement;
+
+    public Timer timer;
+    public Transform winTimer;
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -24,6 +29,11 @@ public class WinGame : MonoBehaviour
 
             mouselook.enabled = false;
             gunScript.enabled = false;
+            playerMovement.enabled = false;
+            
+            timer.stopPlaying();
+
+            winTimer.GetComponent<TextMeshProUGUI>().text = "Time: " + timer.GameTime;
         }
         
     }
