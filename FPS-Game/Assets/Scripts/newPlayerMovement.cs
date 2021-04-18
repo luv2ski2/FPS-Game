@@ -48,6 +48,8 @@ public class newPlayerMovement : MonoBehaviour
     private bool isSliding;
     private float startVelocity;
     private Vector3 dirToWall;
+    public float wallSlideSpeed;
+    private Vector3 slideVelocity;
     
     // Pause game on death
     public Timer timer;
@@ -76,10 +78,13 @@ public class newPlayerMovement : MonoBehaviour
         
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        
+        // Should make a move and jump method, to simplify this code
 
         Vector3 move = transform.right * x + transform.forward * z;
 
         controller.Move(move * speed * Time.deltaTime);
+        // ^ new method
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -102,9 +107,33 @@ public class newPlayerMovement : MonoBehaviour
             // stopCrouch();
         }
         
+        
+        // Move into movement method?
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+        // ^ new method?
+        
+        // Should add a way to check if you're on a wall
+        if (!Input.GetButton("Jump") && isSliding)
+            stopWallSlide();
+    }
+
+    private void FixedUpdate()
+    {
+        if (isSliding)
+        {
+            // Fix below, make it so that the player can't go faster than wall slide speed
+            
+            // rb.AddForce(slideVelocity * wallSlideSpeed * Time.deltaTime);
+
+            rb.velocity = slideVelocity * wallSlideSpeed;
+            
+            // Debug.Log(slideVelocity + "Je;;pgj");
+            // rb.AddForce(transform.forward * wallSlideSpeed * Time.deltaTime);
+            
+            // rb.AddForce(dirToWall * Time.deltaTime);
+        }
     }
 
     public void GetHit()
@@ -136,18 +165,31 @@ public class newPlayerMovement : MonoBehaviour
         
         Debug.Log("Touching Somethin");
 
-        if (collision.transform.gameObject.layer == wallLayerValue && Input.GetButton("Jump") && !isSliding && !isGrounded)
+        /*if (collision.transform.gameObject.layer == wallLayerValue && Input.GetButton("Jump") && !isSliding && !isGrounded)
         {
             Debug.Log("Hello There");
             startWallSlide();
         }
+        */
         
         // return;
         // If crouching and collision is enemy, kill enemy.
         // Allows sliding into enemies
     }
 
-    private void startWallSlide()
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // Debug.Log("Hola");
+        if (hit.transform.gameObject.layer == wallLayerValue)
+            // Debug.Log("Ho");
+        if (hit.collider.transform.gameObject.layer == wallLayerValue && Input.GetButton("Jump") && !isSliding && !isGrounded)
+        {
+            // Debug.Log("Hello there");
+            startWallSlide(hit);
+        }
+    }
+
+    private void startWallSlide(ControllerColliderHit hit)
     {
         isSliding = true;
 
@@ -156,9 +198,34 @@ public class newPlayerMovement : MonoBehaviour
         
         rb.isKinematic = false;
         rb.velocity = controller.velocity;
-        startVelocity = controller.velocity.magnitude;
+        // wallSlideSpeed = controller.velocity.magnitude;
+        // startVelocity = controller.velocity.magnitude;
+
+        // slideVelocity = controller.velocity.normalized;
+        // slideVelocity = hit.moveDirection;
+        
+        // direction to move the playing while wall sliding
+        slideVelocity = transform.forward - hit.normal * Vector3.Dot(transform.forward, hit.normal);
         
         controller.enabled = false;
+
+        // direction to the wall
+        dirToWall = -hit.normal;
+    }
+
+    private void stopWallSlide()
+    {
+        rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        controller.enabled = true;
+        
+        // Reset rotation if your wall slide into a ramp
+        Quaternion resetRotation = Quaternion.Euler(Quaternion.identity.eulerAngles.x, transform.rotation.eulerAngles.y, Quaternion.identity.eulerAngles.z);
+
+        transform.rotation = resetRotation;
+        isSliding = false;
     }
 
     private void startCrouch()

@@ -13,12 +13,15 @@ public class Timer : MonoBehaviour
 
     private double time;
 
+    private double startTime;
+
+    // public getter for time, variable is called GameTime
     public double GameTime => time;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        startTime = Time.time;
     }
 
     // Update is called once per frame
@@ -27,6 +30,8 @@ public class Timer : MonoBehaviour
         if (isPlaying)
         {
             time = Math.Round(Time.time, 2);
+            time -= startTime;
+            time = Math.Round(time, 2);
 
             timer.GetComponent<TextMeshProUGUI>().text = "Timer: " + time;
         }
