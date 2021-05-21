@@ -79,12 +79,10 @@ public class newPlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
-        // Should make a move and jump method, to simplify this code
 
         Vector3 move = transform.right * x + transform.forward * z;
 
         controller.Move(move * speed * Time.deltaTime);
-        // ^ new method
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -108,12 +106,10 @@ public class newPlayerMovement : MonoBehaviour
         }
         
         
-        // Move into movement method?
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
-        // ^ new method?
-        
+
         // Should add a way to check if you're on a wall
         if (!Input.GetButton("Jump") && isSliding)
             stopWallSlide();
