@@ -605,7 +605,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh140578
+  m_Name: pb_Mesh77230
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12406,7 +12406,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053623133}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3822cdbac729ad74eac951c075b7f6b7, type: 3}
@@ -12546,6 +12546,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   wallSlideSpeed: 0
+  timeJump: 0.4
+  wallCheck: {fileID: 0}
+  wallCheckDist: 0
   timer: {fileID: 1320990224}
 --- !u!136 &1053623140
 CapsuleCollider:
@@ -14525,7 +14528,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh140454
+  m_Name: pb_Mesh77096
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15517,6 +15520,7 @@ GameObject:
   - component: {fileID: 1892671806}
   - component: {fileID: 1892671805}
   - component: {fileID: 1892671804}
+  - component: {fileID: 1892671809}
   m_Layer: 9
   m_Name: FinalEnemy
   m_TagString: Untagged
@@ -15612,6 +15616,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1892671809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892671803}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f8ae5c253868a4a854bccb56a99eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamersound: {fileID: 1053623137}
 --- !u!1 &1894588326
 GameObject:
   m_ObjectHideFlags: 0
