@@ -30,7 +30,7 @@ public class WinGame : MonoBehaviour
             mouselook.enabled = false;
             gunScript.enabled = false;
             playerMovement.enabled = false;
-            
+                
             timer.stopPlaying();
 
             winTimer.GetComponent<TextMeshProUGUI>().text = "Time: " + timer.GameTime;

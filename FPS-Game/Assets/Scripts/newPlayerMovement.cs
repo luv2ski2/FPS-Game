@@ -116,7 +116,7 @@ public class newPlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        // Should add a way to check if you're on a wall
+        // Should add a way to check if you're on a wall // Did That
         if (!Input.GetButton("Jump") && isSliding)
             stopWallSlide();
 
@@ -125,6 +125,8 @@ public class newPlayerMovement : MonoBehaviour
             stopWallSlide();
             Debug.Log("kfdjslajfklads");
         }
+        
+        Debug.Log(isSliding);
 
     }
 
